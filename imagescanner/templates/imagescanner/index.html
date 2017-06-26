@@ -1,0 +1,5 @@
+<ul>
+   {%for upload in all uploads %}
+   <li><a href = "/imagescanner/{{ upload.id }}/">{{ upload.upload }}</a></li>
+   {% endfor %}
+</ul>
