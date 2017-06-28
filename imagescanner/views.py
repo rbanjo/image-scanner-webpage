@@ -13,10 +13,10 @@ ocr_form_view = OcrFormView.as_view()
 
 class OcrView(View):
     def post(self, request):
-        with Image.open(request.FILES['image']) as image:
-                sharpened_image = image.filter(ImageFilter.SHARPEN)
-                utf8_text=pytesseract.image_to_string(sharpened_image)
-                print(utf8_text)
+        img=Image.open(request.FILES['image'])
+        sharpened_image = img.filter(ImageFilter.SHARPEN)
+        utf8_text=pytesseract.image_to_string(sharpened_image)
+        print(utf8_text)
         return JsonResponse({'utf8_text': utf8_text})
 
 ocr_view = csrf_exempt(OcrView.as_view())
