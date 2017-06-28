@@ -1,14 +1,21 @@
 #take url request and send http response
 from django.http import HttpResponse
-from django.template import loader 
+from django.http.response import JsonResponse
+from django.views.generic.base import View, TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from PIL import Image, ImageFilter
+import pytesseract
 
 # Create your views here.
-def index(response):
-   all_uploads = uploads.objects.all()
-   template = loader.get__template('image.scanner/index,html')
-   context = {
-      'all_uploads': all_uploads,
-   }
-   
-   return HttpResponse(template.render(context, request)
-   
+class OcrFormView(TemplateView):
+    template_name='ocr_form.html'
+ocr_form_view = OcrFormView.as_view()
+
+class OcrView(View):
+    def post(self, request, *args, **kwargs):
+        with Image.open(request.FILES['image']) as image:
+                sharpened_image = image.filter(ImageFilter.SHARPEN)
+                utf8_text=pytesseract.image_to_string(sharpened_image)
+        return JsonResponse({'utf8_text': utf8_text})
+
+ocr_view = csrf_exempt(OcrView.as_view())
