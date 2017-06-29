@@ -20,6 +20,7 @@ def get_string(name):
     img=Image.open(name)
     sharpened_image = img.filter(ImageFilter.SHARPEN)
     utf8_text = pytesseract.image_to_string(sharpened_image)
+    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
     return utf8_text
 
 class OcrView(View):
