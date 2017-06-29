@@ -6,10 +6,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import os
-from django.conf import settings
+
+
 from PIL import Image, ImageFilter
 from wand.image import Image as IMG
 import pytesseract
+import datetime
 
 # Create your views here.
 class OcrFormView(TemplateView):
@@ -18,8 +20,7 @@ ocr_form_view = OcrFormView.as_view()
 
 def get_string(name):
     img=Image.open(name)
-    sharpened_image = img.filter(ImageFilter.SHARPEN)
-    utf8_text = pytesseract.image_to_string(sharpened_image)
+    utf8_text = pytesseract.image_to_string(img)
     utf8_text = str(utf8_text.encode('ascii', 'ignore'))
     return utf8_text
 
@@ -34,7 +35,10 @@ class OcrView(View):
             img=IMG(filename=data.name,resolution=200)
             img.save(filename='temp.jpg')
             utf8_text=get_string('temp.jpg')
+            os.remove('temp.jpg')
+            os.remove(data.name)
             print(utf8_text)
+        print(datetime.datetime.now())
         return JsonResponse({'utf8_text': utf8_text})
 
 
