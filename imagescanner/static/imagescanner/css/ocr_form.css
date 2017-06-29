@@ -63,7 +63,7 @@
 }
 
 .button-container {
-    min-height: 5vh;
+    min-height: 10vh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
