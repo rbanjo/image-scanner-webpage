@@ -30,7 +30,7 @@
 .image-container {
     border-color: black;
     border-width: medium;
-    border-style: dashed;
+    border-style: hidden;
     margin-right: 1vw;
     flex: 1;
 }
@@ -43,11 +43,11 @@
 }
 
 .result-container {
-    border-style: dashed;
+    border-style: hidden;
     border-width: medium;
     margin-left: 1vw;
     flex: 1;
-    font-family: monospace;
+    white-space: pre-line;
 }
 
 .result-default {
@@ -63,8 +63,8 @@
 }
 
 .button-container {
-    min-height: 5vh;
+    min-height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }

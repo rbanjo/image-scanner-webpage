@@ -19,21 +19,24 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <link rel="stylesheet" href="{% static 'imagescanner/css/ocr_form.css' %}"/>
+        <span style="font-size: larger" ><p></p><p></p><element class="boldText">Upload a file and extract text from it</element></span>
     </head>
-    <body>
+    <body style="text-align: center">
         <div class="vertical-center">
             <div class="form-container">
               <div class="input-container">
                 <div class="form-group">
-                  <label for="image">Chose an image...</label>
-                  <input type="file" id="image-input" data-js-image-input/>
+                    <input type="file" id="image-input" data-js-image-input/><p></p>
+                    <div class="button-container"><button class="btn btn-default" type="button" data-js-go-button>Extract!</button></div>
                 </div>
               </div>
               <div class="image-result-container">
-                  <div class="image-container" data-js-image-container></div>
-                  <div class="result-container result-default" data-js-result-container></div>
+                  <div class="image-container" data-js-image-container>
+                      <span style="font-size: large">Image Uploaded Appears Here</span></div>
+                  <div class="result-container result-default" data-js-result-container>
+                      <span style="font-size: large">Text Extracted Appears Here</span></div>
               </div>
-              <div class="button-container"><button class="btn btn-default" type="button" data-js-go-button>Go!</button></div>
+
             </div>
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
